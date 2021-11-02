@@ -39,19 +39,19 @@ public class ParametroRestController {
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); //Http status code
 	}
 	
-	@GetMapping("/buscarpadre/{parametroPadreId}") //Http Method GET
-	public ResponseEntity<?> buscarPadre(@PathVariable Integer parametroPadreId) {
-		Parametro parametro=parametroService.findById(parametroPadreId);		
-		if(parametro!=null) {
-			return new ResponseEntity<>(parametro,HttpStatus.OK); //Http status code
-		}		
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); //Http status code
-	}
+	//@GetMapping("/buscarpadre/{idParametroPadre}") //Http Method GET
+	//public ResponseEntity<?> buscarPadre(@PathVariable int idParametroPadre) {
+	//	Collection<Parametro> parametro = parametroService.findByIdParametroPadre(idParametroPadre);		
+	//	if(parametro!=null) {
+	//		return new ResponseEntity<>(parametro,HttpStatus.OK); //Http status code
+	//	}		
+	//	return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); //Http status code
+	//}
 	
 	@PostMapping("/agregar") //Http Method POST
 	public ResponseEntity<?> agregar(@RequestBody Parametro parametro) {
-		parametroService.insert(parametro);		
-		return new ResponseEntity<Void>(HttpStatus.CREATED); //Http status code	
+		Parametro parametroCreado =  parametroService.insert(parametro);		
+		return new ResponseEntity<>(parametroCreado, HttpStatus.CREATED); //Http status code	
 	}
 	
 	@PutMapping("/editar/{parametroId}") //Http Method PUT
@@ -70,13 +70,13 @@ public class ParametroRestController {
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); //Http status code
 	}
 	
-	@DeleteMapping("/borrar/{instructorId}") //Http Method DELETE
-	public ResponseEntity<?> borrar(@PathVariable Integer parametroId)
+	@DeleteMapping("/borrar/{idParametro}") //Http Method DELETE
+	public ResponseEntity<?> borrar(@PathVariable Integer idParametro)
 	{
-		Parametro parametro=parametroService.findById(parametroId);
+		Parametro parametro=parametroService.findById(idParametro);
 		
 		if(parametro!=null) {
-			parametroService.delete(parametroId);
+			parametroService.delete(idParametro);
 			return new ResponseEntity<Void>(HttpStatus.OK); //Http status code
 		}		
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND); //Http status code

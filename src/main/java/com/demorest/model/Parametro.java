@@ -1,6 +1,8 @@
 package com.demorest.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -13,29 +15,37 @@ public class Parametro implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer IdParametro;
+	@Column(name = "IdParametro")
+	private Integer idParametro;
 	
-	@Column(nullable = true)
-	private Integer IdParametroPadre;
+	@Column(nullable = true, name = "IdParametroPadre")
+	private Integer idParametroPadre;
 	
-	@Column
-	private String NombreParametro;
+	@Column(name = "NombreParametro")
+	private String nombreParametro;
 	
-	@Column
-	private Integer EstadoRegistro;
+	@Column(name = "EstadoRegistro")
+	private Integer estadoRegistro;
 	
-	@Column
-	private String UsuarioCreacion;
-	
-	@Temporal(TemporalType.DATE)
-	private Date FechaCreacion;
-	
-	@Column(nullable = true)
-	private String UsuarioModificacion;
+	@Column(name = "UsuarioCreacion")
+	private String usuarioCreacion;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = true)
-	private Date FechaModificacion;
+	@Column(name = "FechaCreacion")
+	private Date fechaCreacion;
+	
+	@Column(nullable = true, name = "UsuarioModificacion")
+	private String usuarioModificacion;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = true, name = "FechaModificacion")
+	private Date fechaModificacion;
+	
+	@OneToMany(mappedBy = "parametro")
+	private Collection<Empleado> itemsEmpleado = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "parametro")
+	private Collection<Cliente> itemsCliente = new ArrayList<>();
 	
 	public Parametro(Parametro parametro) {
 		this(parametro.getIdParametro(),parametro.getIdParametroPadre(),parametro.getNombreParametro(),
@@ -49,71 +59,112 @@ public class Parametro implements Serializable{
 	public Parametro(Integer idParametro, Integer idParametroPadre, String nombreParametro, Integer estadoRegistro,
 			String usuarioCreacion, Date fechaCreacion, String usuarioModificacion, Date fechaModificacion) {
 		super();
-		this.IdParametro = idParametro;
-		this.IdParametroPadre = idParametroPadre;
-		this.NombreParametro = nombreParametro;
-		this.EstadoRegistro = estadoRegistro;
-		this.UsuarioCreacion = usuarioCreacion;
-		this.FechaCreacion = fechaCreacion;
-		this.UsuarioModificacion = usuarioModificacion;
-		this.FechaModificacion = fechaModificacion;
+		this.idParametro = idParametro;
+		this.idParametroPadre = idParametroPadre;
+		this.nombreParametro = nombreParametro;
+		this.estadoRegistro = estadoRegistro;
+		this.usuarioCreacion = usuarioCreacion;
+		this.fechaCreacion = fechaCreacion;
+		this.usuarioModificacion = usuarioModificacion;
+		this.fechaModificacion = fechaModificacion;
 	}
+	
+	public Parametro(Integer idParametro, Integer idParametroPadre, String nombreParametro, Integer estadoRegistro,
+			String usuarioCreacion, Date fechaCreacion, String usuarioModificacion, Date fechaModificacion, Collection<Empleado> itemsEmpleado) {
+		super();
+		this.idParametro = idParametro;
+		this.idParametroPadre = idParametroPadre;
+		this.nombreParametro = nombreParametro;
+		this.estadoRegistro = estadoRegistro;
+		this.usuarioCreacion = usuarioCreacion;
+		this.fechaCreacion = fechaCreacion;
+		this.usuarioModificacion = usuarioModificacion;
+		this.fechaModificacion = fechaModificacion;
+		this.itemsEmpleado = itemsEmpleado;
+	}
+	
+	public Parametro(Integer idParametro, Integer idParametroPadre, String nombreParametro, Integer estadoRegistro,
+			String usuarioCreacion, Date fechaCreacion, String usuarioModificacion, Date fechaModificacion, Collection<Empleado> itemsEmpleado, Collection<Cliente> itemsCliente) {
+		super();
+		this.idParametro = idParametro;
+		this.idParametroPadre = idParametroPadre;
+		this.nombreParametro = nombreParametro;
+		this.estadoRegistro = estadoRegistro;
+		this.usuarioCreacion = usuarioCreacion;
+		this.fechaCreacion = fechaCreacion;
+		this.usuarioModificacion = usuarioModificacion;
+		this.fechaModificacion = fechaModificacion;
+		this.itemsEmpleado = itemsEmpleado;
+		this.itemsCliente = itemsCliente;
+	}
+	
 	
 	@PrePersist
 	public void prePersist() {
-		FechaCreacion=new Date();
+		fechaCreacion=new Date();
 	}	
 		
 	public Integer getIdParametro() {
-		return IdParametro;
+		return idParametro;
 	}
 	public void setIdParametro(Integer idParametro) {
-		IdParametro = idParametro;
+		this.idParametro = idParametro;
 	}
 	public Integer getIdParametroPadre() {
-		return IdParametroPadre;
+		return idParametroPadre;
 	}
 	public void setIdParametroPadre(Integer idParametroPadre) {
-		IdParametroPadre = idParametroPadre;
+		this.idParametroPadre = idParametroPadre;
 	}
 	public String getNombreParametro() {
-		return NombreParametro;
+		return nombreParametro;
 	}
 	public void setNombreParametro(String nombreParametro) {
-		NombreParametro = nombreParametro;
+		this.nombreParametro = nombreParametro;
 	}
 	public Integer getEstadoRegistro() {
-		return EstadoRegistro;
+		return estadoRegistro;
 	}
 	public void setEstadoRegistro(Integer estadoRegistro) {
-		EstadoRegistro = estadoRegistro;
+		this.estadoRegistro = estadoRegistro;
 	}
 	public String getUsuarioCreacion() {
-		return UsuarioCreacion;
+		return usuarioCreacion;
 	}
 	public void setUsuarioCreacion(String usuarioCreacion) {
-		UsuarioCreacion = usuarioCreacion;
+		this.usuarioCreacion = usuarioCreacion;
 	}
 	public Date getFechaCreacion() {
-		return FechaCreacion;
+		return fechaCreacion;
 	}
 	public void setFechaCreacion(Date fechaCreacion) {
-		FechaCreacion = fechaCreacion;
+		this.fechaCreacion = fechaCreacion;
 	}
 	public String getUsuarioModificacion() {
-		return UsuarioModificacion;
+		return usuarioModificacion;
 	}
 	public void setUsuarioModificacion(String usuarioModificacion) {
-		UsuarioModificacion = usuarioModificacion;
+		this.usuarioModificacion = usuarioModificacion;
 	}
 	public Date getFechaModificacion() {
-		return FechaModificacion;
+		return fechaModificacion;
 	}
 	public void setFechaModificacion(Date fechaModificacion) {
-		FechaModificacion = fechaModificacion;
+		this.fechaModificacion = fechaModificacion;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	
+	
+	public Collection<Empleado> getItemsEmpleado(){
+		return itemsEmpleado;
+	}
+	public void setItemsEmpleado(Collection<Empleado> itemsEmpleado) {
+		this.itemsEmpleado = itemsEmpleado;
+	}
+	public Collection<Cliente> getItemsCliente(){
+		return itemsCliente;
+	}
+	public void setItemsCliente(Collection<Cliente> itemsCliente) {
+		this.itemsCliente = itemsCliente;
 	}
 	
 }
