@@ -3,77 +3,41 @@ package com.demorest.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name = "empleado")
 public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IdEmpleado")
 	private Integer idEmpleado;
 	
-	@Column(name = "NombreEmpleado")
 	private String nombreEmpleado;
 	
-	@Column(name = "ApellidoPaterno")
 	private String apellidoPaterno;
 	
-	@Column(name = "ApellidoMaterno")
 	private String apellidoMaterno;
 	
-	@ManyToOne
-	@JoinColumn(name = "TipoDocumento", nullable = false, foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(tipo_documento) references parametro(id_parametro)"))
-	@JsonBackReference
 	private Parametro parametro;
 	
-	@Column(name = "NumeroDocumento",length = 11)
 	private String numeroDocumento;
 	
-	@ManyToOne
-	@JoinColumn(name = "IdDistrito", nullable = false, foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (id_distrito) references distrito(id_distrito)"))
-	@JsonBackReference
 	private Distrito distrito;
 	
-	@Column(name = "DireccionEmpleado")
 	private String direccionEmpleado;
 	
-	@Column(name = "TelefonoEmpleado")
 	private String telefonoEmpleado;
 	
-	@Column(name = "CorreoEmpleado")
 	private String correoEmpleado;
 	
-	@Column(name = "EstadoRegistro")
 	private Integer estadoRegistro;
 	
-	@Column(name = "UsuarioCreacion")
 	private String usuarioCreacion;
 	
-	@Column(name = "FechaCreacion")
 	private Date fechaCreacion;
 	
-	@Column(name = "UsuarioModificacion", nullable = true)
 	private String usuarioModificacion;
 	
-	@Column(name = "fechaModificacion", nullable = true)
 	private Date fechaModificacion;
 	
-	@PrePersist
+	
 	public void prePersist() {
 		this.fechaCreacion = new Date();
 	}

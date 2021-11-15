@@ -1,72 +1,44 @@
 package com.demorest.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name = "cliente")
-public class Cliente implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class Cliente{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IdCliente")
+	
 	private Integer idCliente;
 	
-	@Column(name = "NombreCliente")
 	private String nombreCliente;
 	
-	@Column(name = "ApellidoPaterno")
 	private String apellidoPaterno;
 	
-	@ManyToOne
-	@JoinColumn(name = "TipoDocumento", nullable = false, foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(tipo_documento) references parametro(id_parametro)"))
-	@JsonBackReference
 	private Parametro parametro;
 	
-	@Column(name = "NumeroDocumento")
 	private String numeroDocumento;
 	
-	@ManyToOne
-	@JoinColumn(name = "IdDistrito", nullable = false, foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (id_distrito) references distrito(id_distrito)"))
-	@JsonBackReference
 	private Distrito distrito;
 	
-	@Column(name = "DireccionCliente")
+	
 	private String direccionCliente;
 	
-	@Column(name = "TelefonoCliente")
+	
 	private String telefonoCliente;
 	
-	@Column(name = "CorreoCliente")
+	
 	private String correoCliente;
 	
-	@Column(name = "EstadoRegistro")
+	
 	private Integer estadoRegistro;
 	
-	@Column(name = "UsuarioCreacion")
+	
 	private String usuarioCreacion;
 	
-	@Column(name = "FechaCreacion")
+	
 	private Date fechaCreacion;
 	
-	@Column(name = "UsuarioModificacion", nullable = true)
+	
 	private String usuarioModificacion;
 	
-	@Column(name = "FechaModificacion", nullable = true)
+	
 	private Date fechaModificacion;
 	
 	public Cliente() {

@@ -1,88 +1,34 @@
 package com.demorest.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-
-@Entity
-@Table(name = "distrito")
-public class Distrito implements Serializable{
+public class Distrito{
 	
-	public static final long serialVersionUID = 1L;
+	private Integer IdDistrito;	
+	private String NombreDistrito;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idDistrito;
-	
-	@Column(name = "nombredistrito")
-	private String nombreDistrito;
-	
-	@OneToMany(mappedBy = "distrito")
-	private Collection<Empleado> itemsEmpleado = new ArrayList<Empleado>();
-	
-	@OneToMany(mappedBy = "distrito")
-	private Collection<Cliente> itemsCliente = new ArrayList<Cliente>();
-		
 	public Distrito() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Distrito(Integer idDistrito, String nombreDistrito) {
+	public Distrito(Integer IdDistrito, String NombreDistrito) {
 		super();
-		this.idDistrito = idDistrito;
-		this.nombreDistrito = nombreDistrito;
-	}
-	
-	public Distrito(Integer idDistrito, String nombreDistrito, Collection<Empleado> itemsEmpleado) {
-		super();
-		this.idDistrito = idDistrito;
-		this.nombreDistrito = nombreDistrito;
-		this.itemsEmpleado = itemsEmpleado;
-	}
-	
-	public Distrito(Integer idDistrito, String nombreDistrito, Collection<Empleado> itemsEmpleado, Collection<Cliente> itemsCliente) {
-		super();
-		this.idDistrito = idDistrito;
-		this.nombreDistrito = nombreDistrito;
-		this.itemsEmpleado = itemsEmpleado;
-		this.itemsCliente = itemsCliente;
+		this.IdDistrito = IdDistrito;
+		this.NombreDistrito = NombreDistrito;
 	}
 	
 	public Integer getIdDistrito() {
-		return idDistrito;
+		return IdDistrito;
 	}
-	public void setIdDistrito(Integer idDistrito) {
-		this.idDistrito = idDistrito;
+	public void setIdDistrito(Integer IdDistrito) {
+		this.IdDistrito = IdDistrito;
 	}
 	public String getNombreDistrito() {
-		return nombreDistrito;
+		return NombreDistrito;
 	}
-	public void setNombreDistrito(String nombreDistrito) {
-		this.nombreDistrito = nombreDistrito;
+	public void setNombreDistrito(String NombreDistrito) {
+		this.NombreDistrito = NombreDistrito;
 	}
 	
-	
-	public Collection<Empleado> getEmpleado(){
-		return itemsEmpleado;
-	}
-	public void setItemsEmpleado(Collection<Empleado> itemsEmpleado) {
-		this.itemsEmpleado = itemsEmpleado;
-	}
-	public Collection<Cliente> getClienteo(){
-		return itemsCliente;
-	}
-	public void setItemsCliente(Collection<Cliente> itemsCliente) {
-		this.itemsCliente = itemsCliente;
-	}
 
 }

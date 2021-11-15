@@ -2,16 +2,17 @@ package com.demorest.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-import com.demorest.model.Parametro;
+import com.demorest.DTO.ParametroDTO;
 
-@Repository
-public interface ParametroRepository extends CrudRepository<Parametro, Integer> {
+
+@Mapper
+public interface ParametroRepository{	
 	
-	//@Query("SELECT p FROM parametro p WHERE p.id_parametro_padre = ?1")
-	//public List<Parametro> findByIdParametroPadre(int idParametroPadre);
+	@Select("CALL SP_ListarParametroPorPadre(#{idParametroPadre})")
+	List<ParametroDTO> buscarPorPadre(@Param("idParametroPadre") Integer idParametroPadre);
 
 }
